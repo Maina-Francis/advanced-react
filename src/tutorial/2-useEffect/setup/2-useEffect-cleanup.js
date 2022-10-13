@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 
-// cleanup function
-// second argument
-
 const UseEffectCleanup = () => {
   const [size, setSize] = useState(window.innerWidth);
   // console.log(size);
 
+  //add event listener to useEffect to listen for the change in window size
   const checkSize = () => {
     setSize(window.innerWidth);
   };
+
   useEffect(() => {
     window.addEventListener("resize", checkSize);
-    console.log(`window size ${size}`);
+    console.log(size);
 
-    // cleanup function
+    //cleanup function for the eventlistener
     return () => {
-      console.log("cleanup");
+      // console.log("clean up function");
       window.removeEventListener("resize", checkSize);
     };
-  }, []);
+  });
 
   return (
     <>
       <h1>Window Size</h1>
-
       <h2>{size} PX</h2>
     </>
   );
